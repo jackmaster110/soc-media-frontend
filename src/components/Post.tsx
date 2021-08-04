@@ -23,8 +23,8 @@ function Post(props: PostProps) {
             <span className="user">{"@" + props.user}</span>
             <br />
             <span className="post-content">{props.post}</span>
-        </div>,
-    ] : [<div className="post"></div>];
+        </div>
+    ] : [<div className="empty-post"></div>];
     props.otherPosts.forEach((item) => {
         if (props.isReply && props.replyTo === item.nanoid)
             posts = [

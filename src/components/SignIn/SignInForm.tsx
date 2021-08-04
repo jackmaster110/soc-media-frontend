@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 type SignInFormProps = {
-    signIn: (signedIn: boolean) => void;
+    signIn: (signedIn: boolean, user: string) => void;
 };
 
 function SignInForm(props: SignInFormProps) {
-    const [formUsername, setFormUsername] = useState<string>();
-    const [formPassword, setFormPassword] = useState<string>();
+    const [formUsername, setFormUsername] = useState<string>("");
+    const [formPassword, setFormPassword] = useState<string>("");
 
     const onUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setFormUsername(event.currentTarget.value);
@@ -29,7 +29,8 @@ function SignInForm(props: SignInFormProps) {
                     const username = item.username;
 
                     props.signIn(
-                        formPassword === password && formUsername === username
+                        formPassword === password && formUsername === username,
+                        formUsername
                     );
                 });
             });
