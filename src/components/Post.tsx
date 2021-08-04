@@ -1,5 +1,4 @@
 import React from "react";
-import { ReplyType } from "./Reply";
 
 export type PostType = {
     nanoid: string;
@@ -7,7 +6,6 @@ export type PostType = {
     user: string;
     replyTo: string;
     isReply: boolean;
-    asReply(): () => ReplyType;
 };
 
 type PostProps = {
@@ -20,11 +18,11 @@ type PostProps = {
 };
 
 function Post(props: PostProps) {
-    let posts = props.isReply ? [
+    let posts = !props.isReply ? [
         <div className="post">
-            <span>{props.user}</span>
+            <span className="user">{"@" + props.user}</span>
             <br />
-            <span>{props.post}</span>
+            <span className="post-content">{props.post}</span>
         </div>,
     ] : [<div className="post"></div>];
     props.otherPosts.forEach((item) => {
@@ -32,9 +30,9 @@ function Post(props: PostProps) {
             posts = [
                 ...posts,
                 <div className="reply">
-                    <span>{"> " + props.user}</span>
+                    <span className="user">{"> @" + props.user}</span>
                     <br />
-                    <span>{props.post}</span>
+                    <span className="post-content">{props.post}</span>
                 </div>,
             ];
     });

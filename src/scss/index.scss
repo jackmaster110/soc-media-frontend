@@ -85,5 +85,53 @@ body {
                 }
             }
         }
+
+        .post-container {
+            display: flex;
+            flex-direction: column;
+            
+            background-color: $magnolia;
+            border-radius: 4px;
+
+            padding: 6px;
+
+            .post, .reply {
+                padding: 4px;
+                border-radius: 4px;
+                
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+
+                
+            }
+
+            .post {
+                background-color: rgba($blue, .5);
+
+                span {
+                    color: $black;
+                    font-size: 18px;
+
+                    &.user {
+                        font-size: 22px;
+                    }
+                }
+            }
+            
+            .reply {
+                background-color: rgba($blue, .2);
+
+                span {
+                    color: $black;
+                    font-size: 14px;
+                    padding-left: 14px;
+
+                    &.user {
+                        font-size: 18px;
+                    }
+                }
+            }
+        }
     }
 }
