@@ -19,14 +19,20 @@ function SignInForm(props: SignInFormProps) {
     };
 
     const submitForm = (event: React.MouseEvent<HTMLInputElement>) => {
-        axios.get(process.env.REACT_APP_BACKEND_URL + "/api/get-users").then((res) => {
-            const data = JSON.parse(res.data);
-            const username = data.username;
-            const password = data.password;
-            props.signIn(
-                formPassword === password && formUsername === username
-            );
-        });
+        axios
+            .get(process.env.REACT_APP_BACKEND_URL + "/api/get-users")
+            .then((res) => {
+                const data = res.data;
+                console.log(data);
+                data.forEach((item: any) => {
+                    const password = item.password;
+                    const username = item.username;
+
+                    props.signIn(
+                        formPassword === password && formUsername === username
+                    );
+                });
+            });
     };
 
     return (
