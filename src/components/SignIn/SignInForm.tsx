@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-function SignInForm() {
+type SignInFormProps = {
+    signIn: (signedIn: boolean) => void;
+};
+
+function SignInForm(props: SignInFormProps) {
     const [formUsername, setFormUsername] = useState<string>();
     const [formPassword, setFormPassword] = useState<string>();
 
@@ -15,7 +19,14 @@ function SignInForm() {
     };
 
     const submitForm = (event: React.MouseEvent<HTMLInputElement>) => {
-        axios.get(process.env.BACKEND_URL + "/api/get-")
+        axios.get(process.env.REACT_APP_BACKEND_URL + "/api/get-users").then((res) => {
+            const data = JSON.parse(res.data);
+            const username = data.username;
+            const password = data.password;
+            props.signIn(
+                formPassword === password && formUsername === username
+            );
+        });
     };
 
     return (
@@ -33,7 +44,11 @@ function SignInForm() {
                     placeholder="Password"
                     onChange={onPasswordChange}
                 />
-                <input className="form-submit" type="submit" onClick={submitForm} />
+                <input
+                    className="form-submit"
+                    type="submit"
+                    onClick={submitForm}
+                />
                 <footer>
                     <span>
                         <Link to="/signUp">Click here to sign up</Link>

@@ -24,7 +24,7 @@ function App() {
                         <p>Test</p>
                     </Route>
                     <Route path="/signIn">
-                        <SignInForm />
+                        <SignInForm signIn={setIsLoggedIn} />
                     </Route>
                 </Switch>
             </div>
