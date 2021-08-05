@@ -47,7 +47,7 @@ function Feed(props: FeedProps) {
             isReply: true
         }
         setPostsList([...postsList, newReply]);
-        axios.post(process.env.REACT_APP_BACKEND_URL + `/api/add-reply/${id}`, JSON.stringify(postsList));
+        axios.post(process.env.REACT_APP_BACKEND_URL + `/api/add-reply/${id}`, JSON.stringify(newReply));
     };
 
     useEffect(() => {

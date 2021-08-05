@@ -17,35 +17,45 @@ type PostProps = {
     isReply: boolean;
     otherPosts: PostType[];
     doReplyChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    doReplyClick: (event: React.MouseEvent<HTMLButtonElement>, id: string) => void;
+    doReplyClick: (
+        event: React.MouseEvent<HTMLButtonElement>,
+        id: string
+    ) => void;
 };
 
 function Post(props: PostProps) {
-    let posts = !props.isReply ? [
-        <div className="post">
-            <span className="user">{"@" + props.user}</span>
-            <br />
-            <span className="post-content">{props.post}</span>
-        </div>
-    ] : [<div className="empty-post"></div>];
+    let posts = !props.isReply
+        ? [
+              <div className="post">
+                  <span className="user">{"@" + props.user}</span>
+                  <br />
+                  <span className="post-content">{props.post}</span>
+              </div>,
+          ]
+        : [];
     props.otherPosts.forEach((item) => {
-        if (props.isReply && props.replyTo === item.nanoid)
+        if (item.isReply && item.replyTo === props.nanoid)
             posts = [
                 ...posts,
                 <div className="reply">
-                    <span className="user">{"> @" + props.user}</span>
+                    <span className="user">{"> @" + item.user}</span>
                     <br />
-                    <span className="post-content">{props.post}</span>
+                    <span className="post-content">{item.post}</span>
                 </div>,
             ];
     });
 
+    let addItem = (
+        <AddReply
+            doClick={(e) => props.doReplyClick(e, props.nanoid)}
+            doChange={props.doReplyChange}
+        />
+    );
     return (
         <div className="post-container">
             {posts.map((post) => {
-                return post;
+                return [post, addItem];
             })}
-            <AddReply doClick={(e) => props.doReplyClick(e, props.nanoid)} doChange={props.doReplyChange} />
         </div>
     );
 }
