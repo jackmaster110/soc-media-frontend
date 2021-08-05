@@ -21,10 +21,7 @@ function SignUpForm() {
             username: formUsername,
             password: formPassword
         }
-        axios.post(process.env.REACT_APP_BACKEND_URL + "/api/add-user", JSON.stringify(newUser))
-            .then((res) => {
-                console.log(res.data);
-            });
+        axios.post(process.env.REACT_APP_BACKEND_URL + "/api/add-user", JSON.stringify(newUser));
     }
 
     return(

@@ -27,8 +27,6 @@ function SignInForm(props: SignInFormProps) {
                 data.forEach((item: any) => {
                     const password = item.password;
                     const username = item.username;
-                    console.log(username + " " + formUsername);
-                    console.log(formPassword === password && formUsername === username);
                     props.signIn(
                         formPassword === password && formUsername === username,
                         username
