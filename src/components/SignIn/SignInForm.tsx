@@ -23,7 +23,6 @@ function SignInForm(props: SignInFormProps) {
             .get(process.env.REACT_APP_BACKEND_URL + "/api/get-users")
             .then((res) => {
                 const data = res.data;
-                console.log(data);
                 data.forEach((item: any) => {
                     const password = item.password;
                     const username = item.username;
