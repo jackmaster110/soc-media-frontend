@@ -1,4 +1,5 @@
 import React from "react";
+import AddReply from "./AddReply";
 
 export type PostType = {
     nanoid: string;
@@ -15,6 +16,8 @@ type PostProps = {
     replyTo: string;
     isReply: boolean;
     otherPosts: PostType[];
+    doReplyChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    doReplyClick: (event: React.MouseEvent<HTMLButtonElement>, id: string) => void;
 };
 
 function Post(props: PostProps) {
@@ -42,6 +45,7 @@ function Post(props: PostProps) {
             {posts.map((post) => {
                 return post;
             })}
+            <AddReply doClick={(e) => props.doReplyClick(e, props.nanoid)} doChange={props.doReplyChange} />
         </div>
     );
 }

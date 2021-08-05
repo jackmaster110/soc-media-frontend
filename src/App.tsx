@@ -8,15 +8,16 @@ import SignUpForm from "./components/SignIn/SignUpForm";
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-    const [currentUser, setCurrentUser] = useState<string>("");
+    const [currentUser, setCurrentUser] = useState<string>("Anonymous");
 
     const signOut = (event: React.MouseEvent<HTMLButtonElement>) => {
         setIsLoggedIn(false);
+        setCurrentUser("Anonymous")
     }
 
     const signIn = (creds: boolean, username: string) => {
         setIsLoggedIn(creds);
-        if (isLoggedIn) setCurrentUser(username);
+        if (creds) setCurrentUser(username);
     }
 
     return (

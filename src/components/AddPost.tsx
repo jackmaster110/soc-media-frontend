@@ -9,6 +9,7 @@ function AddPost(props: AddPostProps) {
     return (
         <div className="post-container add-post-container">
             <input
+                placeholder="Soc..."
                 className="add-post-input"
                 type="text"
                 onChange={props.doChange}
